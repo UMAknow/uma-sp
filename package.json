@@ -1,0 +1,27 @@
+{
+  "name": "uma-sp",
+  "version": "1.0.0",
+  "description": "Utility functions to interact with SharePoint Online that builds on top of PnP-JS-Core.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UMAknow/uma-sp.git"
+  },
+  "keywords": [
+    "SharePoint"
+  ],
+  "author": "\"umaknow <pierre@umaknow.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UMAknow/uma-sp/issues"
+  },
+  "homepage": "https://github.com/UMAknow/uma-sp#readme",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "sp-pnp-js": "^2.0.3"
+  }
+}
