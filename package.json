@@ -1,10 +1,12 @@
 {
   "name": "uma-sp",
-  "version": "1.0.0",
+  "version": "1.0.10",
   "description": "Utility functions to interact with SharePoint Online that builds on top of PnP-JS-Core.",
-  "main": "index.js",
+  "main": "./dist/uma.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,10 @@
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "sp-pnp-js": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/jquery": "^2.0.41",
+    "@types/lodash": "^4.14.62",
+    "typescript": "^2.2.2"
   }
 }

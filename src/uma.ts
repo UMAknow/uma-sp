@@ -1,7 +1,12 @@
-// var Email = require('./email/email-utils');
-//
-// exports.email = Email;
-
-import { Email } from 'email/email-utils';
+import { Email } from './email/email-utils';
 
 export const email = Email;
+
+const Def = {
+    /**
+     * Provides access to the Email utilities
+     */
+    email: email
+};
+
+export default Def;
