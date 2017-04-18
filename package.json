@@ -1,6 +1,6 @@
 {
   "name": "uma-sp",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Utility functions to interact with SharePoint Online that builds on top of PnP-JS-Core.",
   "main": "./dist/uma.js",
   "scripts": {
