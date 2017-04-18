@@ -1,9 +1,11 @@
 import * as pnp from 'sp-pnp-js';
 import * as _ from 'lodash';
 import * as jquery from 'jquery';
+import { EmailConfig } from './email-config';
 
 export class Email {
-    static getTemplateAndSend(templateName, templateParams, from, to, subject) {
+
+    public static getTemplateAndSend(templateName, templateParams, from, to, subject) {
         const inSharePoint = typeof _spPageContextInfo !== 'undefined';
         let pnpPromise = new Promise((resolve, reject) => {
             if (inSharePoint) {
@@ -23,25 +25,30 @@ export class Email {
         return pnpPromise;
     }
 
-    static getEmailTemplate(name, params) {
+    public static getEmailTemplate(name, params) {
         const inSharePoint = typeof _spPageContextInfo !== 'undefined';
         if (inSharePoint) {
             let pnpPromise = new Promise((resolve, reject) => {
-                pnp.sp.site.rootWeb.lists.getByTitle('Workflow Email Templates').items.filter("Title eq '" + name + "'").get().then(results => {
-                    let template = "";
-                    if (results[0]) {
-                        if (_spPageContextInfo.currentLanguage === 1036) {
-                            template = results[0].TemplateFR;
+                let templatesListName = EmailConfig.getTemplatesListName();
+                if(templatesListName != "") {
+                    pnp.sp.site.rootWeb.lists.getByTitle(templatesListName).items.filter("Title eq '" + name + "'").get().then(results => {
+                        let template = "";
+                        if (results[0]) {
+                            if (_spPageContextInfo.currentLanguage === 1036) {
+                                template = results[0].TemplateFR;
+                            }
+                            else {
+                                template = results[0].TemplateEN;
+                            }
                         }
-                        else {
-                            template = results[0].TemplateEN;
-                        }
-                    }
-                    _.forEach(params, function (param, index) {
-                        template = template.replace("@" + index + "@", param);
+                        _.forEach(params, function (param, index) {
+                            template = template.replace("@" + index + "@", param);
+                        });
+                        resolve(template);
                     });
-                    resolve(template);
-                });
+                }
+                else
+                    resolve("Template List Not Set");
             });
             return pnpPromise;
         }
@@ -57,7 +64,7 @@ export class Email {
         }
     }
 
-    static send(from, to, body, subject) {
+    public static send(from, to, body, subject) {
         let p = new Promise((resolve, reject) => {
             // fetch(url, reqOptions).then(function(response){
             //     resolve(response.ok);
