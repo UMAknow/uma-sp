@@ -28,6 +28,12 @@ export class Email {
     public static getEmailTemplate(name, params) {
         const inSharePoint = typeof _spPageContextInfo !== 'undefined';
         if (inSharePoint) {
+            pnp.setup({
+                headers:{
+                    "Accept": "application/json; odata=verbose",
+                },
+            });
+
             let pnpPromise = new Promise((resolve, reject) => {
                 let templatesListName = EmailConfig.getTemplatesListName();
                 if(templatesListName != "") {
